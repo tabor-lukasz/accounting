@@ -11,7 +11,7 @@ Parsing correctnes delegated to serde crate.
 Sample test data and result included in test_data dir.
 
 This is single threaed application due to one input stream.
-If it should work in multi threades enviroment then Engine and user functions (process_xyx ) should be modified to by async. Synchronization for users collection and particular users should be made by wrapping in Arc RwLock.
+If it should work in multi threaded enviroment then Engine and user functions (process_xyx ) should be modified to be async. Synchronization for users collection and particular users should be made by wrapping in Arc RwLock.
 
 Errors are handled by returning Result<> of every operatioon that may fail. In case of transaction errors, transaction is ignored and error is just printed to stderr.
 
