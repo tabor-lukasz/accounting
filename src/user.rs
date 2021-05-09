@@ -56,6 +56,7 @@ pub struct User {
 }
 
 impl User {
+    /// Entry point to processing requests
     pub fn process_tx(&mut self, tx: TransactionRequset) -> Result<(), String> {
         if self.frozen {
             return Err("Account frozen".to_string());
@@ -72,6 +73,7 @@ impl User {
         Ok(())
     }
 
+    /// Processes deposit request
     fn process_deposit(&mut self, tx: TransactionRequset) -> Result<(), String> {
         if self.tx_history.contains_key(&tx.tx) {
             return Err(format!("Doubled transaction id. Ignored.\n{:?}", tx));
@@ -95,6 +97,7 @@ impl User {
         Ok(())
     }
 
+    /// Processes withdrawal request
     fn process_withdrawal(&mut self, tx: TransactionRequset) -> Result<(), String> {
         if self.tx_history.contains_key(&tx.tx) {
             return Err(format!("Doubled transaction id. Ignored.\n{:?}", tx));
@@ -124,6 +127,7 @@ impl User {
         Ok(())
     }
 
+    /// Processes dispute request
     fn process_dispute(&mut self, tx: TransactionRequset) -> Result<(), String> {
         let old_tx = match self.tx_history.get_mut(&tx.tx) {
             None => return Err(format!("Invalid tx id. Ignored.\n{:?}", tx)),
@@ -142,6 +146,7 @@ impl User {
         }
     }
 
+    /// Processes resolve request
     fn process_resolve(&mut self, tx: TransactionRequset) -> Result<(), String> {
         let old_tx = match self.tx_history.get_mut(&tx.tx) {
             None => return Err(format!("Invalid tx id. Ignored.\n{:?}", tx)),
@@ -157,6 +162,7 @@ impl User {
         }
     }
 
+    /// Processes chargeback request
     fn process_chargeback(&mut self, tx: TransactionRequset) -> Result<(), String> {
         let old_tx = match self.tx_history.get_mut(&tx.tx) {
             None => return Err(format!("Invalid tx id. Ignored.\n{:?}", tx)),
