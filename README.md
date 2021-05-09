@@ -1,7 +1,7 @@
 Simple transations handling engine
 
 Assumptions made:
-- Only disputed transactions may be disputed
+- Only deposit transactions may be disputed
 - One transaction may be disputed many times (after prior resolve)
 - There is no need to check if a transaction id is globally unique
 
